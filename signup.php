@@ -1,31 +1,22 @@
 <?php
-include "db.php";
+include "db_setup.php"; // Ensures DB & table exist
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Encrypt password
+    $password = password_hash($_POST["password"], PASSWORD_DEFAULT); // Hash password
 
-    // Check if email already exists
-    $checkEmail = $conn->prepare("SELECT email FROM users WHERE email = ?");
-    $checkEmail->bind_param("s", $email);
-    $checkEmail->execute();
-    $checkEmail->store_result();
+    // Insert user into auth table (with name, email, and password)
+    $stmt = $conn->prepare("INSERT INTO auth (name, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $name, $email, $password);
 
-    if ($checkEmail->num_rows > 0) {
-        echo json_encode(["status" => "error", "message" => "Email already exists!"]);
+    if ($stmt->execute()) {
+        echo json_encode(["status" => "success", "message" => "Signup successful"]);
     } else {
-        $stmt = $conn->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $email, $password);
-
-        if ($stmt->execute()) {
-            echo json_encode(["status" => "success", "message" => "Signup successful!"]);
-        } else {
-            echo json_encode(["status" => "error", "message" => "Signup failed!"]);
-        }
-        $stmt->close();
+        echo json_encode(["status" => "error", "message" => "User already exists"]);
     }
 
-    $checkEmail->close();
+    $stmt->close();
 }
+$conn->close();
 ?>

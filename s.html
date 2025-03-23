@@ -11,7 +11,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('https://images.unsplash.com/photo-1605379399642-870262d3d051') no-repeat center center/cover;
+            background: linear-gradient(135deg, #DDEECC, #ABC69F) no-repeat center center/cover;
             color: #fff;
         }
         .container {
@@ -23,8 +23,17 @@
             width: 350px;
             color: black;
         }
+        h4 {
+            color: #2e8b57;
+        }
         h2 {
             color: #2e8b57;
+        }
+        .logo {
+            width: 180px;  /* Adjust as needed */
+            display: block;
+            margin: 0 auto 10px;
+            border-radius: 10px;  /* Optional: For rounded edges */
         }
         .input-group {
             margin: 10px 0;
@@ -72,7 +81,10 @@
 <body>
 
 <div class="container">
-    <h2>Expense Tracker</h2>
+    <h2>Create Your Account</h2>
+    <img src="https://scontent.fpkr3-1.fna.fbcdn.net/v/t1.15752-9/484558060_624454513679285_1619993849434325200_n.jpg?_nc_cat=101&ccb=1-7&_nc_ohc=j9JqKoRRal8Q7kNvgEKDPja&_nc_oc=AdnLTQBY4QiHoIcndUrK-X0dQXu2UVJ-2BYaey4305HmnwuqPecFcaoLXGPClRLqPwIEceibHZJEdwfi6u8TIacL&_nc_ad=z-m&_nc_cid=1750&_nc_zt=23&_nc_ht=scontent.fpkr3-1.fna&stp=c0.5000x0.5000f_dst-emg0_p480x251_q75_tt6&ur=0024fc&_nc_sid=c24604&oh=03_Q7cD1wFG8wECA4vj7G9SiwaCvN1a4cDHHsi32Mj3qNcd5Vhx7Q&oe=68061CAF"  
+    alt="Expenses Vault Logo" class="logo">
+   <h4>Secure & Smart Expense Management</h4>
     <h3>Sign up</h3>
 
     <div class="input-group">
@@ -146,7 +158,7 @@
 
     document.addEventListener("DOMContentLoaded", function() {
     validateSignupForm();
-    validateLoginForm();
+    //validateLoginForm();
 });
 
 </script>
